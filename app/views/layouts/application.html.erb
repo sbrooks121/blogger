@@ -14,6 +14,11 @@
   <body>
     <%= render 'shared/navigation' %>
 
+    <div class="row">
+      <div class="small-12 mediums-12 columns">
+        <p class="flash"><%= flash.notice %></p>
+      </div>
+    </div>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>
