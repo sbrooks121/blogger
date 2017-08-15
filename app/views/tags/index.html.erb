@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="small-12 mediums-12 columns">
+    <h1>All Tags</h1>
+
+    <ul id="tags">
+      <% @tags.each do |tag| %>
+        <li>
+          <%= link_to tag.name, tag_path(tag) %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>
