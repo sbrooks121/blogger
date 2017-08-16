@@ -2,6 +2,9 @@
   <div class="small-12 medium-12 columns">
     <h1><%= @article.title %></h1>
     <p>
+      Author:
+      <%= @article.author.first_name + " " + @article.author.last_name %></p>
+    <p>
       Tags:
       <% @article.tags.each do |tag| %>
         <%= link_to tag.name, tag_path(tag) %>
@@ -17,7 +20,9 @@
     <%= render partial: 'articles/comment', collection: @article.comments %>
     <%= render partial: 'comments/form' %>
     <%= link_to "<< Back to Articles List", articles_path %><br />
-    <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %><br />
-    <%= link_to "Edit", edit_article_path(@article) %>
+    <% if @article.author == current_user %>
+      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %><br />
+      <%= link_to "Edit", edit_article_path(@article) %>
+    <% end %>
   </div>
 </div>

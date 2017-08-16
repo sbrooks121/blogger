@@ -15,12 +15,22 @@
     <%= render 'shared/navigation' %>
 
     <div class="row">
-      <div class="small-12 mediums-12 columns">
+      <div class="small-12 medium-12 columns">
         <p class="flash"><%= flash.notice %></p>
       </div>
+      <div class="small-12 medium-12 columns">
+        <%= yield %>
+      </div>
+      <h6>
+        <% if logged_in? %>
+          <%= "#{current_user.email}" %>
+          <%= link_to "(logout)", logout_path %>
+        <% else %>
+          <%= link_to "(login)", login_path %>
+        <% end %>
+      </h6>
     </div>
 
-    <%= yield %>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
