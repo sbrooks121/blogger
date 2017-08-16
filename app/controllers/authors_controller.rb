@@ -81,6 +81,6 @@ class AuthorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_params
-      params.require(:author).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation, :password)
+      params.require(:author).permit(:username, :first_name, :last_name, :email, :password, :password_confirmation)
     end
 end

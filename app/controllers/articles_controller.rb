@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
     @article.destroy
 
-    flash.notice = "Article '#{@article.title}' Removed!"
+    flash.notice = "Article '#{@article.title}' deleted!"
 
     redirect_to articles_path
   end
