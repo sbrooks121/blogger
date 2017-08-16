@@ -20,5 +20,7 @@
   <%= @author.email %>
 </p>
 
-<%= link_to 'Edit', edit_author_path(@author) %> |
-<%= link_to 'Back', authors_path %>
+<p>
+  <%= link_to 'Edit', edit_author_path(@author), class: "button" %>
+  <%= link_to 'Back', authors_path, class: "button" %>
+</p>

@@ -1,6 +1,7 @@
 <div class="row">
   <div class="small-12 medium-12 columns">
     <h1><%= @article.title %></h1>
+    <p><%= @article.body %></p>
     <p>
       Author:
       <%= @article.author.first_name + " " + @article.author.last_name %></p>
@@ -15,14 +16,13 @@
         <%= image_tag @article.image.url(:medium) %>
       <% end %>
     </p>
-    <p><%= @article.body %></p>
     <h3>Comments (<%= @article.comments.size %>)</h3>
     <%= render partial: 'articles/comment', collection: @article.comments %>
     <%= render partial: 'comments/form' %>
-    <%= link_to "<< Back to Articles List", articles_path %><br />
+    <%= link_to "Back to Articles List", articles_path, class: "button" %><br />
     <% if @article.author == current_user %>
-      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %><br />
-      <%= link_to "Edit", edit_article_path(@article) %>
+      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "button" %><br />
+      <%= link_to "Edit", edit_article_path(@article), class: "button" %>
     <% end %>
   </div>
 </div>
