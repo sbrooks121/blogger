@@ -40,9 +40,11 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
       if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
+        flash[:success] = "Author was successfully created."
+        format.html { redirect_to @author }
         format.json { render :show, status: :created, location: @author }
       else
+        flash[:alert] = 'There was a problem creating the author.'
         format.html { render :new }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
@@ -54,9 +56,11 @@ class AuthorsController < ApplicationController
   def update
     respond_to do |format|
       if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
+        flash[:success] = "Author was successfully updated."
+        format.html { redirect_to @author }
         format.json { render :show, status: :ok, location: @author }
       else
+        flash[:alert] = 'There was a problem updating the author.'
         format.html { render :edit }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
@@ -68,7 +72,8 @@ class AuthorsController < ApplicationController
   def destroy
     @author.destroy
     respond_to do |format|
-      format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
+      flash[:success] = "Author was successfully destroyed."
+      format.html { redirect_to authors_url }
       format.json { head :no_content }
     end
   end
