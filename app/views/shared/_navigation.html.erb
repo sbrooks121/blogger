@@ -1,11 +1,36 @@
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-      <h1><a href="/">Blogger</a></h1>
-    </li>
+<div class="fixed">
+  <nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">Blogger</a></h1>
+      </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
 
-    <li class="toggle-topbar">
-      <a href="#"><span>Menu</span></a>
-    </li>
-  </ul>
-</nav>
+    <section class="top-bar-section">
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <li class="has-dropdown">
+          <a href="#">
+            <% if logged_in? %>
+              <%= "#{current_user.first_name} #{current_user.last_name}" %>
+            <% else %>
+              <%= link_to "Login", login_path %>
+            <% end %>
+          </a>
+          <ul class="dropdown">
+            <% if logged_in? %>
+              <li><a href="#"><%= link_to "Logout", logout_path %></a></li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- Left Nav Section
+      <ul class="left">
+        <li><a href="#">Left Nav Button</a></li>
+      </ul> -->
+    </section>
+  </nav>
+</div>

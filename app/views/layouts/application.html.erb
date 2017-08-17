@@ -29,14 +29,6 @@
       <div class="small-3 columns">
         <%= render 'shared/sidebar' %>
       </div>
-      <h6>
-        <% if logged_in? %>
-          <%= "#{current_user.email}" %>
-          <%= link_to "(logout)", logout_path %>
-        <% else %>
-          <%= link_to "(login)", login_path %>
-        <% end %>
-      </h6>
     </div>
 
     <%= javascript_include_tag "application" %>

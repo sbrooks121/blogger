@@ -21,6 +21,8 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
+# jQuery rails
+gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -33,10 +35,14 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Use jQuery turbolinks
+gem 'jquery-turbolinks'
 # Use foundation for front-end framework
 gem 'foundation-rails'
+# Use jquery ui rails
+gem 'jquery-ui-rails'
 # Use font awesome icons
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 4.7.0'
 # Use paperclip for file uploading
 gem 'paperclip'
 # Use sorcery for authentication
