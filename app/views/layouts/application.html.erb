@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%= auto_discovery_link_tag :rss, articles_url(:format => :rss) %>
 
     <title>Blogger</title>
 
@@ -12,24 +13,22 @@
   </head>
 
   <body>
-    <%= render 'shared/navigation' %>
+    <header>
+      <%= render 'shared/navigation' %>
+    </header>
 
-    <div class="row">
-      <% flash.each do |name, msg| %>
-        <% if msg.is_a?(String) %>
-          <%= content_tag :div, msg, class: "alert-box #{name} radius" %>
-        <% end %>
-      <% end %>
-    </div>
+    <main>
+      <%= render 'shared/messages' %>
 
-    <div class="row">
-      <div class="small-9 columns">
-        <%= yield %>
+      <div class="row">
+        <div class="small-9 columns">
+          <%= yield %>
+        </div>
+        <div class="small-3 columns">
+          <%= render 'shared/sidebar' %>
+        </div>
       </div>
-      <div class="small-3 columns">
-        <%= render 'shared/sidebar' %>
-      </div>
-    </div>
+    </main>
 
     <%= javascript_include_tag "application" %>
   </body>

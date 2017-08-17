@@ -1,26 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="small-12 medium-12 columns">
+    <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
-  <%= @author.username %>
-</p>
+    <p>
+      <strong>Username:</strong>
+      <%= @author.username %>
+    </p>
 
-<p>
-  <strong>First Name:</strong>
-  <%= @author.first_name %>
-</p>
+    <p>
+      <strong>First Name:</strong>
+      <%= @author.first_name %>
+    </p>
 
-<p>
-  <strong>Last Name:</strong>
-  <%= @author.last_name %>
-</p>
+    <p>
+      <strong>Last Name:</strong>
+      <%= @author.last_name %>
+    </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @author.email %>
-</p>
+    <p>
+      <strong>Email:</strong>
+      <%= @author.email %>
+    </p>
 
-<p>
-  <%= link_to 'Edit', edit_author_path(@author), class: "button" %>
-  <%= link_to 'Back', authors_path, class: "button" %>
-</p>
+    <p>
+      <%= link_to 'Edit', edit_author_path(@author), class: "button tiny" %>
+      <%= link_to 'Back', authors_path, class: "button tiny" %>
+    </p>
+  </div>
+</div>

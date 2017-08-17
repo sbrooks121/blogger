@@ -4,11 +4,16 @@ class ArticlesController < ApplicationController
   include ArticlesHelper
 
   def index
-    @articles = Article.all
+    @articles = Article.last(10)
+    respond_to do |format|
+      format.html
+      format.rss { render :layout => false }
+    end
   end
 
   def show
     @article = Article.find(params[:id])
+    @article.increment_view_count
 
     @comment = Comment.new
     @comment.article_id = @article.id
@@ -21,6 +26,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     @article.author = current_user
+    @article.view_count = 0
 
     respond_to do |format|
       if @article.save
@@ -58,7 +64,7 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    
+
     respond_to do |format|
       if @article.destroy
         flash[:success] = "Article '#{@article.title}' deleted!"

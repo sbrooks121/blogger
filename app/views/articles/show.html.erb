@@ -8,8 +8,12 @@
     <p>
       Tags:
       <% @article.tags.each do |tag| %>
-        <%= link_to tag.name, tag_path(tag) %>
+        <%= link_to tag.name, tag_path(tag), class: 'label round radius' %>
       <% end %>
+    </p>
+    <p>
+      Views:
+      <%= @article.view_count %>
     </p>
     <p>
       <% if @article.image.exists? %>
@@ -19,10 +23,10 @@
     <h3>Comments (<%= @article.comments.size %>)</h3>
     <%= render partial: 'articles/comment', collection: @article.comments %>
     <%= render partial: 'comments/form' %>
-    <%= link_to "Back to Articles List", articles_path, class: "button" %><br />
+    <%= link_to "Back to Articles List", articles_path, class: "button tiny" %><br />
     <% if @article.author == current_user %>
-      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "button" %><br />
-      <%= link_to "Edit", edit_article_path(@article), class: "button" %>
+      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "button tiny" %><br />
+      <%= link_to "Edit", edit_article_path(@article), class: "button tiny" %>
     <% end %>
   </div>
 </div>
