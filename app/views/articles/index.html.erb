@@ -1,23 +1,31 @@
-<div class="row">
-  <div class="small-12 medium-12 columns">
-    <h1>All Articles</h1>
+<div class="article-row-section">
+  <div class="article-row-section-inner">
+
+    <h2 class="article-row-section-header">Articles</h2>
+
     <% @articles.each do |article| %>
-      <div>
-        <%= article.title %>
-      </div>
-      <div>
-        <%= raw(article.body).truncate(358) %>
-      </div>
-      <div>
-        <%= link_to "Read More", article_path(article) %>
-      </div>
+    <a>
+      <article class="article-row">
+        <div class="article-row-content">
+          <h1 class="article-row-content-header"><%= article.title %></h1>
+
+          <p class="article-row-content-description"><div>
+            <%= raw(article.body).truncate(358) %>
+          </div></p>
+
+          <p><%= link_to "Read More", article_path(article) %></p>
+
+          <p class="article-row-content-author"><%= article.author.first_name + " " + article.author.last_name %></p>
+          <time class="article-row-content-time" datetime="2008-02-14 20:00"><%= article.created_at %></time>
+        </div>
+      </article>
+    </a>
     <% end %>
-  </div>
-</div>
-<div class="row">
-  <div class="small-12 medium-12 columns">
-    <% if logged_in? %>
-      <%= link_to "New Article", new_article_path, class: "button tiny" %>
-    <% end %>
+
+    <div>
+      <% if logged_in? %>
+        <%= link_to "New Article", new_article_path, class: "button tiny" %>
+      <% end %>
+    </div>
   </div>
 </div>

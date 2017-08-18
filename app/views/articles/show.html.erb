@@ -1,34 +1,57 @@
-<div class="row">
-  <div class="small-12 medium-12 columns">
-    <h1><%= article.title %></h1>
-    <% if article.author == current_user %>
-      <%= link_to "Edit", edit_article_path(article) %> |
-      <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Really delete the article?"} %>
+<div class="neat-article-container">
+  <div class="row large-8 columns align-center">
+    <div class="neat-article-title">
+      <h3 class="article-title">
+        <%= article.title %>
+      </h3>
+      <p class="article-date-read">Posted <%= distance_of_time_in_words(article.created_at) %> ago - 5 min read</p>
+      <p>
+        <% article.tags.each do |tag| %>
+          <%= link_to tag.name, tag_path(tag), class: 'label round radius' %>
+        <% end %>
+      </p>
+    </div>
+  </div>
+  <div class="neat-article-image">
+    <% if article.image.exists? %>
+      <%= image_tag article.image.url(:medium), class: 'article-image' %>
     <% end %>
-    <p><%= article.body %></p>
-    <p>
-      Author:
-      <%= article.author.first_name + " " + article.author.last_name %></p>
-    <p>
-      <% article.tags.each do |tag| %>
-        <%= link_to tag.name, tag_path(tag), class: 'label round radius' %>
-      <% end %>
-    </p>
-    <p>
-      Views:
-      <%= article.view_count %>
-    </p>
-    <p>
-      <% if article.image.exists? %>
-        <%= image_tag article.image.url(:medium) %>
-      <% end %>
-    </p>
+  </div>
+  <div class="row neat-article-content">
+    <div class="small-12 large-12 columns" id="sticky1">
+      <div class="article-content">
+        <%= article.body %>
+      </div>
+    </div>
+  </div>
+  <div class="neat-article-header">
+    <div class="article-header-author">
+      <p>
+        Views:
+        <%= article.view_count %>
+      </p>
+      <p>
+        <% if article.author == current_user %>
+          <%= link_to "Edit", edit_article_path(article) %> |
+          <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Really delete the article?"} %>
+        <% end %>
+      </p>
+      <p class="author-name">
+        <%= article.author.first_name + " " + article.author.last_name %>
+      </p>
+      <p class="author-description">
+        Front End Developer crawling his way to Full Stack Development.
+      </p>
+    </div>
   </div>
 </div>
+
 <div class="row">
   <div class="small-12 medium-12 columns">
-    <h3>Comments (<%= article.comments.size %>)</h3>
-    <%= render partial: 'articles/comment', collection: article.comments %>
+    <div class="comment-section-container">
+      <h3>Comments (<%= article.comments.size %>)</h3>
+      <%= render partial: 'articles/comment', collection: article.comments %>
+    </div>
     <%= render partial: 'comments/form' %>
   </div>
 </div>
