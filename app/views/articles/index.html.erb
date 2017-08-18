@@ -1,15 +1,21 @@
 <div class="row">
   <div class="small-12 medium-12 columns">
     <h1>All Articles</h1>
-
-    <ul>
-      <% @articles.each do |article| %>
-        <li>
-          <%= link_to article.title, article_path(article) %>
-        </li>
-      <% end %>
-    </ul>
-
+    <% @articles.each do |article| %>
+      <div>
+        <%= article.title %>
+      </div>
+      <div>
+        <%= raw(article.body).truncate(358) %>
+      </div>
+      <div>
+        <%= link_to "Read More", article_path(article) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 medium-12 columns">
     <% if logged_in? %>
       <%= link_to "New Article", new_article_path, class: "button tiny" %>
     <% end %>

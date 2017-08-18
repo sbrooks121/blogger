@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
   include ArticlesHelper
 
   def index
-    @articles = Article.last(10)
+    @articles = Article.all
     respond_to do |format|
       format.html
       format.rss { render :layout => false }
@@ -12,15 +12,13 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Article.find(params[:id])
-    @article.increment_view_count
+    article.increment_view_count
 
     @comment = Comment.new
-    @comment.article_id = @article.id
+    @comment.article_id = article.id
   end
 
   def new
-    @article = Article.new
   end
 
   def create
@@ -43,38 +41,40 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
-
     respond_to do |format|
-      if @article.update(article_params)
-        flash[:success] = "Article '#{@article.title}' updated!"
-        format.html { redirect_to article_path(@article) }
-        format.json { render :show, status: :ok, location: @article }
+      if article.update(article_params)
+        flash[:success] = "Article '#{article.title}' updated!"
+        format.html { redirect_to article_path(article) }
+        format.json { render :show, status: :ok, location: article }
       else
         flash[:alert] = 'There was a problem updating the article.'
         format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.json { render json: article.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @article = Article.find(params[:id])
-
     respond_to do |format|
-      if @article.destroy
-        flash[:success] = "Article '#{@article.title}' deleted!"
+      if article.destroy
+        flash[:success] = "Article '#{article.title}' deleted!"
         format.html { redirect_to articles_path }
-        format.json { render :show, status: :ok, location: @article }
+        format.json { render :show, status: :ok, location: article }
       else
-        flash[:alert] = 'There was a problem updating the article.'
+        flash[:alert] = 'There was a problem deleting the article.'
         format.html { render :edit }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.json { render json: article.errors, status: :unprocessable_entity }
       end
     end
   end
+
+  def article
+    @cached_article ||= Article.find_or_initialize_by(params[:id])
+  end
+
+  helper_method :article
+
 end

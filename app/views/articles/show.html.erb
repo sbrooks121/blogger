@@ -1,32 +1,34 @@
 <div class="row">
   <div class="small-12 medium-12 columns">
-    <h1><%= @article.title %></h1>
-    <p><%= @article.body %></p>
+    <h1><%= article.title %></h1>
+    <% if article.author == current_user %>
+      <%= link_to "Edit", edit_article_path(article) %> |
+      <%= link_to "Delete", article_path(article), method: :delete, data: {confirm: "Really delete the article?"} %>
+    <% end %>
+    <p><%= article.body %></p>
     <p>
       Author:
-      <%= @article.author.first_name + " " + @article.author.last_name %></p>
+      <%= article.author.first_name + " " + article.author.last_name %></p>
     <p>
-      Tags:
-      <% @article.tags.each do |tag| %>
+      <% article.tags.each do |tag| %>
         <%= link_to tag.name, tag_path(tag), class: 'label round radius' %>
       <% end %>
     </p>
     <p>
       Views:
-      <%= @article.view_count %>
+      <%= article.view_count %>
     </p>
     <p>
-      <% if @article.image.exists? %>
-        <%= image_tag @article.image.url(:medium) %>
+      <% if article.image.exists? %>
+        <%= image_tag article.image.url(:medium) %>
       <% end %>
     </p>
-    <h3>Comments (<%= @article.comments.size %>)</h3>
-    <%= render partial: 'articles/comment', collection: @article.comments %>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 medium-12 columns">
+    <h3>Comments (<%= article.comments.size %>)</h3>
+    <%= render partial: 'articles/comment', collection: article.comments %>
     <%= render partial: 'comments/form' %>
-    <%= link_to "Back to Articles List", articles_path, class: "button tiny" %><br />
-    <% if @article.author == current_user %>
-      <%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"}, class: "button tiny" %><br />
-      <%= link_to "Edit", edit_article_path(@article), class: "button tiny" %>
-    <% end %>
   </div>
 </div>
