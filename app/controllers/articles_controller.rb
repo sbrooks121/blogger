@@ -11,6 +11,13 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def popular
+    @articles = Article.all.order(view_count: :desc)
+    respond_to do |format|
+      format.html
+    end
+  end
+
   def show
     article.increment_view_count
 
@@ -22,19 +29,19 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-    @article.author = current_user
-    @article.view_count = 0
+    article = Article.new(article_params)
+    article.author = current_user
+    article.view_count = 0
 
     respond_to do |format|
-      if @article.save
-        flash[:success] = "Article '#{@article.title}' created!"
-        format.html { redirect_to article_path(@article) }
-        format.json { render :show, status: :created, location: @article }
+      if article.save
+        flash[:success] = "Article '#{article.title}' created!"
+        format.html { redirect_to article_path(article) }
+        format.json { render :show, status: :created, location: article }
       else
         flash[:alert] = 'There was a problem creating the article.'
         format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
+        format.json { render json: article.errors, status: :unprocessable_entity }
       end
     end
 

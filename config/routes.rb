@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  get 'popular' => 'articles#popular'
+
   resources :tags
   resources :authors
 
